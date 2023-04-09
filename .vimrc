@@ -409,21 +409,23 @@ autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
 autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
 " set file encoding
 set encoding=utf-8
-
+" Use shell script linters
+let b:ale_linters = { 'sh': ['language_server'],}
+let b:ale_fixers = { 'sh' : ['shfmt','shellcheck']}
 " Use python fixers and linters on ALE
-let g:ale_linters = {'python' : ['flake8','bandit','pydocstyle','mypy']}
-let g:ale_fixers = {
+let p:ale_linters = {'python' : ['flake8','bandit','pydocstyle','mypy']}
+let p:ale_fixers = {
       \ '*': ['remove_trailing_lines','trim_whitespace'],
       \ 'python' : ['black','isort']
-\ }
+      \ }
 
 " Use ansible YAML/JSON fixer and linter on ALE
-let g:ale_linters = {'ansible' : ['spectral','yamllint','ansible-lint']}
-let g:ale_fixers = {
-      \ 'yaml' : ['yamlfix']
-\ }
+let y:ale_linters = {'yaml' : ['spectral','yaml-language-server','swaglint','actionlint','circleci']}
+let y:ale_fixers = {
+      \ 'yaml' : ['prettier','yamlfix']
+      \ }
 
 " Use git fixer and linter on ALE
-let g:ale_linters = {'git' : ['actionlint']}
+let git:ale_linters = {'git' : ['actionlint']}
 let g:ale_fix_on_save =1
 
